@@ -14,3 +14,10 @@ source completion.sh
 source jemalloc.sh
 source clickhouse.sh
 ```
+
+### Additional scripts
+
+- [`clog.py`](scripts/clog.py) - highlight ClickHouse logs in the same way as ClickHouse does
+- [`kafkalog.py`](scripts/kafkalog.py) - highlight Kafka logs
+- [`difffolded.pl`](scripts/difffolded.pl) - version of well known `difffolded.pl` that accept `\r`
+- And [others](scripts)
