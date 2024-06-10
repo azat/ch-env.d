@@ -12,4 +12,5 @@ Usually you should put the following into `~/.bashrc` or `~/.profile`:
 source toolchain.sh
 source completion.sh
 source jemalloc.sh
+source clickhouse.sh
 ```
