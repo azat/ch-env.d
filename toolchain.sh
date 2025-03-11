@@ -50,6 +50,9 @@ export -f cmake
 
 function gdb()
 {
+    local RTMIN
+    RTMIN="$(kill -l SIGRTMIN)"
+
     local o=(
         -q
         -ex 'set history filename ~/.gdb_history.ch'
@@ -76,7 +79,7 @@ function gdb()
         # Ignore query_profiler_cpu_time_period_ns signal
         -ex "handle SIGUSR2 pass noprint nostop"
         # Ignore system.stack_trace signal
-        -ex "handle SIGRTMIN pass noprint nostop"
+        -ex "handle $RTMIN pass noprint nostop"
     )
     command gdb "${o[@]}" "$@"
 }
@@ -112,6 +115,9 @@ function lldb()
     done
     shift $((OPTIND-1))
 
+    local RTMIN
+    RTMIN="$(kill -l SIGRTMIN)"
+
     if [ -n "$pid" ]; then
         o+=(
             # And do a manual attach, since the following does not work,
@@ -131,7 +137,7 @@ function lldb()
             # Ignore query_profiler_cpu_time_period_ns signal
             -O "process handle -p true -s false -n false SIGUSR2"
             # Ignore system.stack_trace signal
-            -O "process handle -p true -s false -n false SIGRTMIN"
+            -O "process handle -p true -s false -n false $RTMIN"
         )
         command lldb "${o[@]}" "${args[@]}" "$@"
         return
