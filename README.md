@@ -21,3 +21,11 @@ source clickhouse.sh
 - [`kafkalog.py`](scripts/kafkalog.py) - highlight Kafka logs
 - [`difffolded.pl`](scripts/difffolded.pl) - version of well known `difffolded.pl` that accept `\r`
 - And [others](scripts)
+
+### Updating
+
+From the `ch-env` repository:
+
+```
+git subtree --prefix=ch-env.d pull ../ch-env.d main
+```
