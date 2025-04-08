@@ -22,6 +22,7 @@
 
 import sys
 import signal
+import io
 
 # Copied from clickhouse/base/common/terminalColors.cpp
 priorityColor = {
@@ -105,8 +106,8 @@ def highlightMessage(parts):
     print(line)
 
 def main():
-    # XXX: accept bytes?
-    it = map(str.strip, sys.stdin)
+    stdin = io.TextIOWrapper(sys.stdin.buffer, encoding='utf-8', errors='ignore')
+    it = map(str.strip, stdin)
     it = map(parseMessage, it)
     it = map(highlightMessage, it)
     any(it)
