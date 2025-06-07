@@ -138,8 +138,10 @@ function lldb()
             -O "process handle -p true -s false -n false SIGUSR2"
             # Ignore system.stack_trace signal
             -O "process handle -p true -s false -n false $RTMIN"
+            # Pass SIGINT (to be able to terminate server with C-C)
+            -O "process handle -p true -s true -n true SIGINT"
         )
-        command lldb "${o[@]}" "${args[@]}" "$@"
+        command lldb "${o[@]}" "$@"
         return
     fi
 
