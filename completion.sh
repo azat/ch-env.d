@@ -6,8 +6,6 @@ source "$(dirname "${BASH_SOURCE[0]}")/bootstrap.sh"
 # (see /usr/share/bash-completion/bash_completion)
 function main()
 {
-    export BASH_COMPLETION_USER_FILE=~/.bash_completion.ch
-
     function ensure_line()
     {
         local f=$1 && shift
@@ -21,6 +19,9 @@ function main()
 
     local f
     for f in "$CLICKHOUSE_SRC_PATH"/programs/bash-completion/completions/*; do
+        if [[ $f =~ .*CMakeLists.txt ]]; then
+            continue
+        fi
         ensure_line "$BASH_COMPLETION_USER_FILE" "source $f" -x
     done
 }
